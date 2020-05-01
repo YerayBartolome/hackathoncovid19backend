@@ -27,7 +27,7 @@ public class ApplicationController implements InterfaceAPI {
             return "todo genial chico";
 
         } catch (Exception e) {
-            
+
             return "sa jodio chacho";
         }
     }
