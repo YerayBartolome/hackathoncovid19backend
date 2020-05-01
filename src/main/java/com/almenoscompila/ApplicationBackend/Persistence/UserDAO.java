@@ -6,17 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import javax.imageio.ImageIO;
-import javax.sql.rowset.serial.SerialBlob;
-import javax.sql.rowset.serial.SerialException;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.sql.Blob;
-import java.sql.SQLException;
 import java.util.List;
-
-import com.almenoscompila.ApplicationBackend.Domain.User;
 
 @Repository
 public class UserDAO {
@@ -43,6 +33,7 @@ public class UserDAO {
                 .username(resultSet.getString("username"))
                 .password(resultSet.getString("password"))
                 .profilePic(resultSet.getString("photo"))
+                .description(resultSet.getString("description"))
                 .level(resultSet.getInt("nivel"))
                 .experience(resultSet.getInt("xp"))
                 .build();
