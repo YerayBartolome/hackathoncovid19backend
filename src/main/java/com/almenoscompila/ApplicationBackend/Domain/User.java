@@ -12,14 +12,15 @@ public class User {
     private String username;
     private String email;
     private String password;
-    private String phonenumber;
+    private String description;
     private Image profilePic;
+    private int experience, level;
 
-    public User(String username, String email, String password, String phonenumber, Image profilePic) {
+    public User(String username, String email, String password, String description, Image profilePic, int experience, int level) {
         this.username = username;
         this.email = email;
         this.password = password;
-        this.phonenumber = phonenumber;
+        this.description = description;
         if (profilePic == null) {
             File file = new File("resources/static/DefaultProfilePic.jpg");
             BufferedImage pic = null;
@@ -30,16 +31,35 @@ public class User {
             }
         }
         this.profilePic = profilePic;
+        this.experience = experience;
+        this.level = level;
     }
 
     public User(UserBuilder userBuilder) {
         this.email = userBuilder.email;
         this.username = userBuilder.username;
         this.password = userBuilder.password;
-        this.phonenumber = userBuilder.phonenumber;
+        this.description = userBuilder.description;
         this.profilePic = userBuilder.profilePic;
+        this.experience = userBuilder.experience;
+        this.level = userBuilder.level;
     }
 
+    public int getExperience() {
+        return experience;
+    }
+
+    public void setExperience(int experience) {
+        this.experience = experience;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
 
     public String getUsername() {
         return username;
@@ -65,12 +85,12 @@ public class User {
         this.password = password;
     }
 
-    public String getPhonenumber() {
-        return phonenumber;
+    public String getDescription() {
+        return description;
     }
 
-    public void setPhonenumber(String phonenumber) {
-        this.phonenumber = phonenumber;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Image getProfilePic() {
@@ -83,8 +103,9 @@ public class User {
 
     public static class UserBuilder {
 
-        public String username, password, email, phonenumber;
+        public String username, password, email, description;
         public Image profilePic;
+        public int experience, level;
 
         public UserBuilder() {
         }
@@ -104,13 +125,23 @@ public class User {
             return this;
         }
 
-        public UserBuilder phonenumber(String phonenumber){
-            this.phonenumber = phonenumber;
+        public UserBuilder description(String description){
+            this.description = description;
             return this;
         }
 
         public UserBuilder profilePic(Image profilePic){
             this.profilePic = profilePic;
+            return this;
+        }
+
+        public UserBuilder experience(int experience){
+            this.experience = experience;
+            return this;
+        }
+
+        public UserBuilder level(int level){
+            this.level = level;
             return this;
         }
 
