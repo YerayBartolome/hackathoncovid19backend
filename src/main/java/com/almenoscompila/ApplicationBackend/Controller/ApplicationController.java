@@ -1,7 +1,18 @@
 package com.almenoscompila.ApplicationBackend.Controller;
 
+import com.almenoscompila.ApplicationBackend.Domain.User;
+import com.almenoscompila.ApplicationBackend.Persistence.UserDAO;
+import org.springframework.beans.factory.annotation.Autowired;
+
 public class ApplicationController implements InterfaceAPI {
-    
+
+    private UserDAO userDAO;
+
+    @Autowired
+    public ApplicationController(UserDAO userDAO) {
+        this.userDAO = userDAO;
+    }
+
     @Override
     public String login(String username, String password) {
         return null;
@@ -9,7 +20,16 @@ public class ApplicationController implements InterfaceAPI {
 
     @Override
     public String signUp(String username, String email, String password, String description, String profilePic) {
-        return null;
+        try {
+            User newUser = new User(username, email, password, description, profilePic, 0, 0);
+            this.userDAO.insertUser(newUser);
+
+            return "todo genial chico";
+
+        } catch (Exception e) {
+            
+            return "sa jodio chacho";
+        }
     }
 
     @Override
