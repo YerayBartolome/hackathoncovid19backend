@@ -13,23 +13,14 @@ public class User {
     private String email;
     private String password;
     private String description;
-    private Image profilePic;
+    private String profilePic;
     private int experience, level;
 
-    public User(String username, String email, String password, String description, Image profilePic, int experience, int level) {
+    public User(String username, String email, String password, String description, String profilePic, int experience, int level) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.description = description;
-        if (profilePic == null) {
-            File file = new File("resources/static/DefaultProfilePic.jpg");
-            BufferedImage pic = null;
-            try {
-                pic = ImageIO.read(file);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
         this.profilePic = profilePic;
         this.experience = experience;
         this.level = level;
@@ -93,18 +84,17 @@ public class User {
         this.description = description;
     }
 
-    public Image getProfilePic() {
+    public String getProfilePic() {
         return profilePic;
     }
 
-    public void setProfilePic(Image profilePic) {
+    public void setProfilePic(String profilePic) {
         this.profilePic = profilePic;
     }
 
     public static class UserBuilder {
 
-        public String username, password, email, description;
-        public Image profilePic;
+        public String username, password, email, description, profilePic;
         public int experience, level;
 
         public UserBuilder() {
@@ -130,7 +120,7 @@ public class User {
             return this;
         }
 
-        public UserBuilder profilePic(Image profilePic){
+        public UserBuilder profilePic(String profilePic){
             this.profilePic = profilePic;
             return this;
         }

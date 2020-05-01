@@ -4,11 +4,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class chatDAO {
+public class ChatDAO {
 
     private final JdbcTemplate jdbcTemplate;
 
-    public chatDAO(JdbcTemplate jdbcTemplate) {
+    public ChatDAO(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
