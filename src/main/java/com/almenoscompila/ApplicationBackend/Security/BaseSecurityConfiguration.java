@@ -27,13 +27,11 @@ public class BaseSecurityConfiguration extends WebSecurityConfigurerAdapter {
         this.dataSource = dataSource;
     }
 
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
         return encoder;
     }
-
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
