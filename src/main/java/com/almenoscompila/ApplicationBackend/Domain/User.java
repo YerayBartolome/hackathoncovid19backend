@@ -32,6 +32,15 @@ public class User {
         this.profilePic = profilePic;
     }
 
+    public User(UserBuilder userBuilder) {
+        this.email = userBuilder.email;
+        this.username = userBuilder.username;
+        this.password = userBuilder.password;
+        this.phonenumber = userBuilder.phonenumber;
+        this.profilePic = userBuilder.profilePic;
+    }
+
+
     public String getUsername() {
         return username;
     }
@@ -71,5 +80,44 @@ public class User {
     public void setProfilePic(Image profilePic) {
         this.profilePic = profilePic;
     }
+
+    public static class UserBuilder {
+
+        public String username, password, email, phonenumber;
+        public Image profilePic;
+
+        public UserBuilder() {
+        }
+
+        public UserBuilder email(String email){
+            this.email= email;
+            return this;
+        }
+
+        public UserBuilder username(String username) {
+            this.username = username;
+            return this;
+        }
+
+        public UserBuilder password(String password) {
+            this.password = password;
+            return this;
+        }
+
+        public UserBuilder phonenumber(String phonenumber){
+            this.phonenumber = phonenumber;
+            return this;
+        }
+
+        public UserBuilder profilePic(Image profilePic){
+            this.profilePic = profilePic;
+            return this;
+        }
+
+        public User build() {
+            return new User(this);
+        }
+    }
+
 
 }

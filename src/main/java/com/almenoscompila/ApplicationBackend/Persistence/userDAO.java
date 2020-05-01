@@ -40,6 +40,8 @@ public class userDAO {
 
 
 
+
+
     public static Blob imageToBlob (Image imagen ) {
 
         Blob imagenBlob = null;

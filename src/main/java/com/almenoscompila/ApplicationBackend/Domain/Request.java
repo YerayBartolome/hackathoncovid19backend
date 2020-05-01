@@ -1,4 +1,5 @@
 package com.almenoscompila.ApplicationBackend.Domain;
+import java.awt.*;
 import java.util.ArrayList;
 
 public class Request {
@@ -18,6 +19,17 @@ public class Request {
         this.categories = categories;
         this.demand = demand;
     }
+
+    public Request(RequestBuilder requestBuilder) {
+        this.id = requestBuilder.id;
+        this.title = requestBuilder.title;
+        this.description = requestBuilder.description;
+        this.location = requestBuilder.location;
+        this.categories = requestBuilder.categories;
+        this.demand = requestBuilder.demand;
+    }
+
+
 
     public int getId() {
         return id;
@@ -65,6 +77,51 @@ public class Request {
 
     public void setDemand(boolean demand) {
         this.demand = demand;
+    }
+
+    public static class RequestBuilder {
+
+        public String title, description, location;
+        public ArrayList<String> categories;
+        public boolean demand;
+        public int id;
+
+        public RequestBuilder() {
+        }
+
+        public Request.RequestBuilder title(String title){
+            this.title= title;
+            return this;
+        }
+
+        public Request.RequestBuilder description(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public Request.RequestBuilder location(String location) {
+            this.location = location;
+            return this;
+        }
+
+        public Request.RequestBuilder id(int id){
+            this.id = id;
+            return this;
+        }
+
+        public Request.RequestBuilder demand(boolean demand){
+            this.demand = demand;
+            return this;
+        }
+
+        public Request.RequestBuilder categories(ArrayList<String> categories){
+            this.categories = categories;
+            return this;
+        }
+
+        public Request build() {
+            return new Request(this);
+        }
     }
 
 }
