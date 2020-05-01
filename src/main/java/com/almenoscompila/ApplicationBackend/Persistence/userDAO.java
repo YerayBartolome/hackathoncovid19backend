@@ -1,10 +1,7 @@
-package persistence;
+package com.almenoscompila.ApplicationBackend.Persistence;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
-import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.stereotype.Repository;
 
 @Repository
