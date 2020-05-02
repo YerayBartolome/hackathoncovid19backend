@@ -26,6 +26,11 @@ public class User {
         this.level = level;
     }
 
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
     public User(UserBuilder userBuilder) {
         this.email = userBuilder.email;
         this.username = userBuilder.username;

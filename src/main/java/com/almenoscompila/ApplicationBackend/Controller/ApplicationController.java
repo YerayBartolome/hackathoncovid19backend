@@ -7,6 +7,7 @@ import com.almenoscompila.ApplicationBackend.Persistence.UserDAO;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,8 @@ public class ApplicationController implements InterfaceAPI {
         try {
             List<User> newUser = this.userDAO.retrieveUser(username);
 
-            return crearJSON(newUser.get(0).getUsername()+","+newUser.get(0).getEmail()+","+newUser.get(0).getDescription()+","+newUser.get(0).getProfilePic(), "");
+            return crearJSON(newUser.get(0).getUsername()+","+newUser.get(0).getEmail()+","
+                    +newUser.get(0).getDescription()+","+newUser.get(0).getProfilePic(), "");
 
         } catch (Exception e) {
 
@@ -38,7 +40,7 @@ public class ApplicationController implements InterfaceAPI {
     @Override
     public String signUp(String username, String password) throws JSONException {
         try {
-            User newUser = new User(username, null, password, null, null, 0, 0);
+            User newUser = new User(username, password);
             this.userDAO.insertUser(newUser);
 
             return crearJSON(username, "");
@@ -90,10 +92,21 @@ public class ApplicationController implements InterfaceAPI {
     }
 
     @Override
-    public String postRequest(String title, String description, String location, boolean demand, String username, ArrayList<String> category) throws JSONException {
+    public String postRequest(String title, String description, String location, boolean demand, ArrayList<String> categories) throws JSONException {
         try {
-            this.requestDAO.insertRequest(new Request(title, description, location, category, demand);
-            //insertRequest(Request request, User user)
+            org.springframework.security.core.Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            String username = authentication.getName();
+            this.requestDAO.insertRequest(new Request(title, description, location, categories, demand), username);
+
+            Request request = this.requestDAO.findLastRequest(username).get(0);
+
+            int auxRequestId = request.getId();
+            for (String category : categories) {
+                this.requestDAO.insertCategory(auxRequestId, username, category);
+            }
+
+            //updateMap(location);
+
             return crearJSON(title+","+description+","+location+","+demand+","+username,"");
         } catch (Exception e) {
 

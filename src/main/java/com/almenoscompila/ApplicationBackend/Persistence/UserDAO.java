@@ -17,8 +17,7 @@ public class UserDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    private final String INSERT_USER = "insert into user (mail, username, password, description, photo, nivel, xp) " +
-            "values (?, ?, ?, ?, ?, ?)";
+    private final String INSERT_USER = "insert into user (username, password) " + "values (?, ?)";
     private final String FIND_USER = "select * from registered_user where mail = ?";
     private final String UPDATE_USERNAME = "update user set username = ?";
     private final String UPDATE_PASSWORD = "update user set password = ?";
@@ -41,8 +40,7 @@ public class UserDAO {
 
 
     public int insertUser(User user) {
-        return jdbcTemplate.update(INSERT_USER, user.getEmail(), user.getUsername(), user.getPassword(),
-                user.getDescription(), user.getProfilePic(), user.getLevel(), user.getExperience());
+        return jdbcTemplate.update(INSERT_USER, user.getUsername(), user.getPassword());
     }
 
     public List<User> retrieveUser(String username) {

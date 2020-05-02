@@ -27,7 +27,7 @@ public interface InterfaceAPI {
 
     String getRequest(String requestId);
 
-    String postRequest(String title, String description, String location, boolean demand, String username, ArrayList<String> category) throws JSONException;
+    String postRequest(String title, String description, String location, boolean demand, ArrayList<String> category) throws JSONException;
 
     String completeRequest(String requestId, String location, String requestCreator, String[] participants);
 
