@@ -24,6 +24,11 @@ public class User {
         this.profilePic = profilePic;
     }
 
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
     public User(UserBuilder userBuilder) {
         this.email = userBuilder.email;
         this.username = userBuilder.username;

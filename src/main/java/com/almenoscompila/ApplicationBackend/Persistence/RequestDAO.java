@@ -18,10 +18,11 @@ public class RequestDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    private final String INSERT_REQUEST = "insert into request (title, description, location, demand, user_mail) values (?, ?, ?, ?, ?)";
-    private final String INSERT_CATEGORY = "insert into request_category (request_id, request_mail, category_name) values (?, ?, ?)";
+    private final String INSERT_REQUEST = "insert into request (title, description, location, demand, user_username) values (?, ?, ?, ?, ?)";
+    private final String INSERT_CATEGORY = "insert into request_category (request_id, request_username, category_name) values (?, ?, ?)";
     private final String INACTIVE_REQUEST = "update request set active = '0'";
     private final String FIND_LAST_REQUEST = "select max(to_number(regexp_substr(recipe_id, '\\d+'))) id from request where username = ?";
+    private final String RETRIEVE_ALL_REQUESTS = "select title, description, location, user_username from request where demand = '1'";
 
     private final RowMapper<Request> mapperRequest = (resultSet, i) -> {
         return new Request.RequestBuilder()
@@ -39,17 +40,22 @@ public class RequestDAO {
                 .build();
     };
 
-    public int insertRequest(Request request, User user) {
+    public int insertRequest(Request request, String user) {
         return jdbcTemplate.update(INSERT_REQUEST, request.getTitle(), request.getDescription(),
-                request.getLocation(), request.isDemand(), user.getUsername());
+                request.getLocation(), request.isDemand(), user);
     }
 
-    //public int insertCategories (ArrayList<String> categories) {
-    //        return jdbcTemplate.update(INSERT_CATEGORY, req)
-    //    }
+    public int insertCategory (int id, String username, String category) {
+            return jdbcTemplate.update(INSERT_CATEGORY, id, username, category);
+        }
 
     public List<Request> findLastRequest(String user) {
         return jdbcTemplate.query(FIND_LAST_REQUEST, new Object[] {user}, lastRequest);
     }
+
+    public List<Request> retrieveAllRequests() {
+        return jdbcTemplate.query(RETRIEVE_ALL_REQUESTS, mapperRequest);
+    }
+
 
 }
