@@ -93,7 +93,6 @@ public class ApplicationController implements InterfaceAPI {
     public String postRequest(String title, String description, String location, boolean demand, String username, ArrayList<String> category) throws JSONException {
         try {
             this.requestDAO.insertRequest(new Request(title, description, location, category, demand);
-            //insertRequest(Request request, User user)
             return crearJSON(title+","+description+","+location+","+demand+","+username,"");
         } catch (Exception e) {
 
