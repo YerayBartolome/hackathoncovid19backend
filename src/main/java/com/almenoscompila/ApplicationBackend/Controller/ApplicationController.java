@@ -21,7 +21,7 @@ public class ApplicationController implements InterfaceAPI {
     @Override
     public String signUp(String username, String email, String password, String description, String profilePic) {
         try {
-            User newUser = new User(username, email, password, description, profilePic, 0, 0);
+            User newUser = new User(username, email, password, description, profilePic);
             this.userDAO.insertUser(newUser);
 
             return "todo genial chico";

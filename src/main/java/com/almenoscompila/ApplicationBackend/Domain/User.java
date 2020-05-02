@@ -16,14 +16,12 @@ public class User {
     private String profilePic;
     private int experience, level;
 
-    public User(String username, String email, String password, String description, String profilePic, int experience, int level) {
+    public User(String username, String email, String password, String description, String profilePic) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.description = description;
         this.profilePic = profilePic;
-        this.experience = experience;
-        this.level = level;
     }
 
     public User(UserBuilder userBuilder) {
