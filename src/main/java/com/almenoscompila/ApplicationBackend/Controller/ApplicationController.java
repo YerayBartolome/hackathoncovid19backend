@@ -28,12 +28,12 @@ public class ApplicationController implements InterfaceAPI {
         try {
             List<User> newUser = this.userDAO.retrieveUser(username);
 
-            return crearJSON(newUser.get(0).getUsername()+","+newUser.get(0).getEmail()+","
+            return createJSON(newUser.get(0).getUsername()+","+newUser.get(0).getEmail()+","
                     +newUser.get(0).getDescription()+","+newUser.get(0).getProfilePic(), "");
 
         } catch (Exception e) {
 
-            return crearJSON("", "Login error");
+            return createJSON("", "Login error");
         }
     }
 
@@ -43,11 +43,11 @@ public class ApplicationController implements InterfaceAPI {
             User newUser = new User(username, password);
             this.userDAO.insertUser(newUser);
 
-            return crearJSON(username, "");
+            return createJSON(username, "");
 
         } catch (Exception e) {
 
-            return crearJSON("", "Sign Up error");
+            return createJSON("", "Sign Up error");
         }
     }
 
@@ -87,6 +87,15 @@ public class ApplicationController implements InterfaceAPI {
     }
 
     @Override
+    public String getAllRequests() throws JSONException {
+        try {
+            return createJSON("test","");
+        } catch (Exception e) {
+            return createJSON("", "Error in finding all requests");
+        }
+    }
+
+    @Override
     public String getRequest(String requestId) {
         return null;
     }
@@ -107,10 +116,10 @@ public class ApplicationController implements InterfaceAPI {
 
             //updateMap(location);
 
-            return crearJSON(title+","+description+","+location+","+demand+","+username,"");
+            return createJSON(title+","+description+","+location+","+demand+","+username,"");
         } catch (Exception e) {
 
-            return crearJSON("", "Request creation error");
+            return createJSON("", "Request creation error");
         }
     }
 
@@ -119,7 +128,7 @@ public class ApplicationController implements InterfaceAPI {
         return null;
     }
 
-    public String crearJSON(String str1, String str2) throws JSONException {
+    public String createJSON(String str1, String str2) throws JSONException {
         JSONObject json = new JSONObject();
         json.put("res", str1);
         json.put("err", str2);

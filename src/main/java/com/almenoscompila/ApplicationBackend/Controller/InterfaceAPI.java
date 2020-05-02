@@ -25,6 +25,8 @@ public interface InterfaceAPI {
 
     String getNearRequests(String location, int radius);
 
+    String getAllRequests() throws JSONException;
+
     String getRequest(String requestId);
 
     String postRequest(String title, String description, String location, boolean demand, ArrayList<String> category) throws JSONException;
