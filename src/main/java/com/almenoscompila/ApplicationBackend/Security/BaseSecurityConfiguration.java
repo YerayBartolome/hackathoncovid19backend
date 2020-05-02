@@ -33,6 +33,7 @@ public class BaseSecurityConfiguration extends WebSecurityConfigurerAdapter {
         return encoder;
     }
 
+    /*
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
@@ -74,6 +75,7 @@ public class BaseSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .headers()
                 .frameOptions().disable();
     }
+    */
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {

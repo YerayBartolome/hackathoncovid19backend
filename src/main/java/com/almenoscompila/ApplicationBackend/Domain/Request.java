@@ -11,8 +11,7 @@ public class Request {
     private ArrayList<String> categories;
     private boolean demand;
 
-    public Request(int id, String title, String description, String location, ArrayList<String> categories, boolean demand) {
-        this.id = id;
+    public Request(String title, String description, String location, ArrayList<String> categories, boolean demand) {
         this.title = title;
         this.description = description;
         this.location = location;
